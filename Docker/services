@@ -1,13 +1,19 @@
 
 
-docker run -it \
-  --name pg-database \
-  -e POSTGRES_USER=root\
-  -e POSTGRES_PASSWORD=root\
-  -e POSTGRES_DB=ny_taxi \
-  -v D:/Development/Data-Engineering/Docker/ny_taxi_postgres_data:/var/lib/postgresql/data\
-  -p 5432:5432 \
-  postgres:13
 
 
-docker run -it --name pg-db -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -e POSTGRES_DB=ny_taxi -v D:/Development/Data-Engineering/Docker/ny_taxi_postgres_data:/var/lib/postgresql/data -p 6543:5432 postgres:13
+
+# Docker run for postgres database
+docker run -it -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -e POSTGRES_DB=ny_taxi -v D:/Development/Data-Engineering/Datasets/ny_taxi_pg_data:/var/lib/postgresql/data -p 6543:5432 --network=pg-network --name pg-database postgres:13
+
+
+# Docker run for pgadmin
+docker run -it -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=root -p 8080:80 --network=pg-network --name pgadmin dpage/pgadmin4
+
+
+
+python ingest-data.py --user=test --password=test --host=localhost --port=6543 --dbname=ny_taxi --table_name=yellow_taxi_data --url=https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2022-01.parquet
+
+docker build -t taxi-ingest:v001
+
+docker run -it --network=pg-network taxi_ingest:v001 --user=test --password=test --host=pg-database --port=6543 --dbname=ny_taxi --table_name=yellow_taxi_data --url=https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2022-01.parquet
