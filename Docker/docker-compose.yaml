@@ -6,7 +6,7 @@ services:
       - POSTGRES_PASSWORD=test
       - POSTGRES_DB=ny_taxi
     volumes:
-      - "../Datasets/ny_taxi_pg_data:/var/lib/postgresql/data:rw"
+      - "D:/Development/Data-Engineering/Datasets/ny_taxi_pg_data:/var/lib/postgresql/data:rw"
     ports:
       - "6543:5432"
   pgadmin:
