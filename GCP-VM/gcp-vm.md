@@ -44,3 +44,52 @@ To connect to your GCP VM instance, you need to create an SSH key pair on your l
 #### Generate SSH Key Pair:
 
 Run the following command to generate an SSH key pair:
+
+```sh
+ssh-keygen -t rsa -f ~/.ssh/gcp_vm_key -C "your_email@example.com"
+
+```
+
+Press Enter to accept the default file location and optionally provide a passphrase.
+
+## 1.3 Locate the Public Key: View the public key using:
+```sh
+Copy
+cat ~/.ssh/gcp_vm_key.pub
+```
+
+#### Add the Public Key to Your VM Instance
+-   Access the Instance:
+
+-  **Go to the VM instances** page in the GCP Console and click on the name of your instance.
+Edit the Instance:
+
+-  Click "Edit" at the top of the instance details page.
+-  Add SSH Key:
+
+-   Scroll to the "SSH Keys" section, click "Add item", and paste the public key from *~/.ssh/gcp_vm_key.pub.*
+-   Save Changes:
+
+-   Click "Save".
+##  1.4 Connect to the VM Instance
+-  SSH into the VM: Run the following command in your terminal:
+
+```sh
+ssh -i ~/.ssh/gcp_vm_key username@external-ip-address
+```
+-  Replace username with your desired username.
+-  Replace external-ip-address with your VM's external IP address (found in the GCP instance details).
+Accept the Connection:
+
+-  Type "yes" if prompted to confirm the connection.
+
+
+### Extra:
+-  To automate connection using a config file you can createa a config file with below code and run it directly from terminal to connect to your VM instance
+``` sh
+Host de-zoomcamp
+    HostName External-GCP-VM key
+    User user
+    IdentityFile C:\Users\.ssh\gcp-ssh
+
+```
