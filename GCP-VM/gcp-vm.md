@@ -93,3 +93,8 @@ Host de-zoomcamp
     IdentityFile C:\Users\.ssh\gcp-ssh
 
 ```
+
+- Run below command in your terminal to connect 
+``` 
+ssh de-zoomcamp
+```
