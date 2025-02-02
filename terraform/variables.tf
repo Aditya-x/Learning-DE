@@ -32,5 +32,5 @@ variable "gcs_bucket_name" {
 
 variable "credentials" {
     description = "My Credentials"
-    default = "./keys/my-creds.json"
+    default = "../google/credentials/google-credentials.json"
 }
