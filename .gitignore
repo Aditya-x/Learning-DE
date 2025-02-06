@@ -1,3 +1,9 @@
 Datasets/
 Docker/ny_taxi_pg_data/
 google
+Airflow/config/
+Airflow/airflow_env/
+Airflow/.env
+**/.env
+Airflow/plugins/
+Airflow/logs/
