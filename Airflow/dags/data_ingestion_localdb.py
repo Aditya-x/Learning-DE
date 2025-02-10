@@ -2,7 +2,6 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 import os
-
 from ingest_script import ingest_callable
 from datetime import datetime
 
@@ -39,13 +38,14 @@ with local_workflow:
         task_id = "ingest",
         python_callable=ingest_callable,
         op_kwargs=dict(
-            user=PG_USER,
-            password=PG_PASSWORD,
-            host=PG_HOST,
-            port=PG_PORT,
-            dbname=PG_DATABASE,
+            user="test",
+            password="test",
+            host="localhost",
+            port=5432,
+            dbname="ny_taxi",
             table_name='???',
-            csv_file=OUTPUT_FILE_TEMPLATE
+            parquet_file=OUTPUT_FILE_TEMPLATE,
+            path=AIRFLOW_HOME
         )
     )
 
