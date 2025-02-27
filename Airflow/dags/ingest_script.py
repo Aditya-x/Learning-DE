@@ -32,7 +32,7 @@ def ingest_callable(user, password, host, port, dbname, table_name, parquet_file
         # convert parquet to csv
         print("Entered the Try Block")
         parquet_df = pd.read_parquet(parquet_file)
-        df_iter = np.array_split(parquet_df, len(parquet_df) // 100000 + 1)  # This ensures all fields are properly quoted
+        df_iter = iter(np.array_split(parquet_df, len(parquet_df) // 100000 + 1))  # Convert list to iterator  # This ensures all fields are properly quoted
         
 
         # create engine
@@ -40,7 +40,7 @@ def ingest_callable(user, password, host, port, dbname, table_name, parquet_file
         engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{dbname}')
         print("Engine Created, Trying to Connect to Postgres Instance")
         engine.connect()
-        print(engine.connect() + " --Succecfully connected")
+        print(" --Succecfully connected")
 
 
         # read Parquet in chunks
@@ -59,7 +59,13 @@ def ingest_callable(user, password, host, port, dbname, table_name, parquet_file
             
             t_start = time()
 
-            df = next(df_iter)
+            try:
+
+                df = next(df_iter)
+            except StopIteration:
+                print("All data chunks have been processed")
+                break
+
 
             df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
             df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)

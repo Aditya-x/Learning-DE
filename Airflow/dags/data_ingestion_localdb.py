@@ -40,7 +40,7 @@ with local_workflow:
         op_kwargs=dict(
             user="test",
             password="test",
-            host="localhost",
+            host="pgdatabase",
             port=5432,
             dbname="ny_taxi",
             table_name='???',

@@ -1,5 +1,5 @@
 services:
-  pgdatabse:
+  pgdatabase:
     image: postgres:13
     environment:
       - POSTGRES_USER=test
