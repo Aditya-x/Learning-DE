@@ -1,4 +1,4 @@
-# Docker & PostgreSQL: Key Learnings  
+# Key Learnings  
 
 ## 📝 Learnings  
 - When providing a **host** for a local **PostgreSQL** instance in Docker, use the **service name** instead of `"localhost"`.  
