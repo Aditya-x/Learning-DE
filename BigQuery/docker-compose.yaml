@@ -1,0 +1,10 @@
+services:
+  bigquery-ingest:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/bigq-dbt.json
+    command: ["python", "ingest_data_toBQ.py", "--url", "${DATA_URL}"]
+    volumes:
+      - ./:/app
