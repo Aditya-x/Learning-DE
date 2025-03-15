@@ -1,6 +1,7 @@
 Datasets/
 Docker/ny_taxi_pg_data/
 google
+dbt
 Airflow/config/
 Airflow/plugins/
 Airflow/logs/
@@ -17,6 +18,7 @@ dbt/env/
 BigQuery/.env
 BigQuery/bigq_env
 
+dbt-tut/dbt-env/
 
 # Crash log files
 crash.log

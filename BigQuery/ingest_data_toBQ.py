@@ -21,8 +21,8 @@ def main(params):
 
     # Define file paths
     dataset_path = os.path.join("..", "Datasets")
-    file_name = os.path.join(dataset_path, "taxi_data.parquet")
-    csv_file_name = os.path.join(dataset_path, "taxi_data.csv")
+    file_name = os.path.join(dataset_path, "taxi_zone_lookup.csv")
+    # csv_file_name = os.path.join(dataset_path, "taxi_data.csv")
 
     # Make sure the dataset directory exists
     os.makedirs(dataset_path, exist_ok=True)
@@ -36,13 +36,13 @@ def main(params):
         print("Download Completed")
 
         # Convert parquet to CSV
-        print("Converting Parquet to CSV...")
-        parquet_df = pd.read_parquet(file_name)
-        parquet_df.to_csv(csv_file_name, index=False)
-        print("Conversion Completed")
+        # print("Converting Parquet to CSV...")
+        # parquet_df = pd.read_parquet(file_name)
+        # parquet_df.to_csv(csv_file_name, index=False)
+        # print("Conversion Completed")
 
         # Read CSV in chunks
-        df_iter = pd.read_csv(csv_file_name, iterator=True, chunksize=100000)
+        df_iter = pd.read_csv(file_name, iterator=True, chunksize=100)
         first_chunk = True  # Flag to control replace vs. append in BigQuery
 
         # Build full table ID for BigQuery
@@ -56,10 +56,10 @@ def main(params):
                 df = next(df_iter)
 
                 # Convert datetime columns if they exist
-                if 'tpep_pickup_datetime' in df.columns:
-                    df['tpep_pickup_datetime'] = pd.to_datetime(df['tpep_pickup_datetime'])
-                if 'tpep_dropoff_datetime' in df.columns:
-                    df['tpep_dropoff_datetime'] = pd.to_datetime(df['tpep_dropoff_datetime'])
+                # if 'tpep_pickup_datetime' in df.columns:
+                #     df['tpep_pickup_datetime'] = pd.to_datetime(df['tpep_pickup_datetime'])
+                # if 'tpep_dropoff_datetime' in df.columns:
+                #     df['tpep_dropoff_datetime'] = pd.to_datetime(df['tpep_dropoff_datetime'])
 
                 # Load the chunk into BigQuery
                 if first_chunk:
@@ -79,7 +79,7 @@ def main(params):
         raise
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Ingest Parquet data to BigQuery')
+    parser = argparse.ArgumentParser(description='Ingest data to BigQuery')
     parser.add_argument('--url', help='URL of the parquet file to download', required=True)
     args = parser.parse_args()
     main(args)

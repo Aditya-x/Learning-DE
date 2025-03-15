@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+    - name: staging
+      database: terraform-tut-448913
+      schema: ny_taxi_data
+
+      tables:
+            - name: greeen_taxi_rides
+
+            - name: yellow_taxi_rides
+
+            - name: taxi_zone_lookup
