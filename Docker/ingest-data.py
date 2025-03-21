@@ -15,8 +15,8 @@ def main(params):
     url = params.url
     
     dataset_path = os.path.join("..", "Datasets")
-    file_name = os.path.join(dataset_path, "taxi_data.parquet",)
-    csv_file_name = os.path.join(dataset_path, "taxi_data.csv")
+    file_name = os.path.join(dataset_path, "green_taxi_data.parquet",)
+    csv_file_name = os.path.join(dataset_path, "green_taxi_data.csv")
 
     #make path if not exists
     os.makedirs(dataset_path, exist_ok=True)
@@ -39,11 +39,11 @@ def main(params):
         engine.connect()
 
         # read csv in chunks
-        df_iter = pd.read_csv(csv_file_name, iterator=True, chunksize=100000)
+        df_iter = pd.read_csv(csv_file_name, iterator=True, chunksize=10000)
         df = next(df_iter)
         # convert datetime columns to datetime
-        df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
-        df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+        # df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
+        # df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
 
         #create a schema using the header of the first chunk
         df.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace')
@@ -57,8 +57,8 @@ def main(params):
 
                 df = next(df_iter)
 
-                df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
-                df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+                # df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
+                # df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
 
                 print("Ingesting the Data")
                 df.to_sql(name=table_name, con=engine, if_exists='append')

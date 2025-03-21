@@ -16,4 +16,4 @@ python ingest-data.py --user=test --password=test --host=localhost --port=6543 -
 
 docker build -t taxi-ingest:v001
 
-docker run -it --network=pg-network taxi_ingest:v001 --user=test --password=test --host=pg-database --port=5432 --dbname=ny_taxi --table_name=yellow_taxi_data --url=https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2022-01.parquet
+docker run -it --network=airflow_default taxi_ingest:v001 --user=test --password=test --host=pgdatabase --port=5432 --dbname=ny_taxi --table_name=green_taxi_data --url=https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2022-01.parquet
