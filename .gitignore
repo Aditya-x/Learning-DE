@@ -13,12 +13,14 @@ Airflow/.env
 # .tfstate files
 *.tfstate
 *.tfstate.*
+.vscode
 
 dbt/env/
 BigQuery/.env
 BigQuery/bigq_env
 
 dbt-tut/dbt-env/
+Batch/batch-env
 
 # Crash log files
 crash.log
