@@ -10,6 +10,8 @@ Airflow/.env
 # Local .terraform directories
 **/.terraform/*
 
+Batch/Dataset/
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
