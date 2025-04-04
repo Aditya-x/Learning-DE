@@ -12,6 +12,8 @@ Airflow/.env
 
 Batch/Dataset/
 
+Batch/.ipynb_checkpoints
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
