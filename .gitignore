@@ -11,8 +11,9 @@ Airflow/.env
 **/.terraform/*
 
 Batch/Dataset/
-
+Batch/venv/
 Batch/.ipynb_checkpoints
+de-env
 
 # .tfstate files
 *.tfstate
