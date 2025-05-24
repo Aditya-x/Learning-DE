@@ -15,7 +15,6 @@ Batch/venv/
 Batch/.ipynb_checkpoints
 de-env
 
-google-creds
 # .tfstate files
 *.tfstate
 *.tfstate.*
