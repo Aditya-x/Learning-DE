@@ -4,7 +4,7 @@ from pyspark.conf import SparkConf
 from pyspark.context import SparkContext
 
 credentials_location = '/home/aditya/Learning-DE/google-creds/google-credentials.json'
-
+# Path to your GCS credentials file
 conf = SparkConf() \
     .setMaster('local[*]') \
     .setAppName('test') \
@@ -15,7 +15,7 @@ conf = SparkConf() \
 sc = SparkContext(conf=conf)
 
 hadoop_conf = sc._jsc.hadoopConfiguration()
-
+# Set the GCS connector properties
 hadoop_conf.set("fs.AbstractFileSystem.gs.impl",  "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS")
 hadoop_conf.set("fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem")
 hadoop_conf.set("fs.gs.auth.service.account.json.keyfile", credentials_location)
