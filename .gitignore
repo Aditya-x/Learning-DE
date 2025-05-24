@@ -58,4 +58,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-BigQuery/keys
+BigQuery/keysgoogle-creds/*.json
