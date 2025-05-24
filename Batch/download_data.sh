@@ -10,7 +10,7 @@ if [ -z "$TAXI_TYPE" ] || [ -z "$YEAR" ]; then
   exit 1
 fi
 
-BASE_DIR="/mnt/d/Development/Data-Engineering/Batch/"
+BASE_DIR="/home/aditya/Learning-DE/Batch"
 
 URL_PREFIX="https://d37ci6vzurychx.cloudfront.net/trip-data"
 
